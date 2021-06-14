@@ -18,9 +18,11 @@ from sklearn.model_selection import GridSearchCV
 
 class model_evaluator:
     def __init__(self):
+        #You can add more models here
         self.models = [
+            #use this structure: (name, model())
             ('Linear regression', LinearRegression()),
-            ('Polynomial regression', LinearRegression()),
+            ('Multiple linear regression', LinearRegression()),
             ('SVR', SVR()),
             ('Decision Tree', DecisionTreeRegressor()),
             ('Random Forest', RandomForestRegressor(random_state=42)),
@@ -33,6 +35,8 @@ class model_evaluator:
 
         self.metrics = []
         
+        #You can change the grid search params here
+        #make sure the keys are the same name inside of self.models
         self.grid_searchs = {
             'SVR': {
                 'C':[0.1, 1, 5, 10, 100, 1000],
@@ -52,7 +56,9 @@ class model_evaluator:
     def generate_metrics(self, name, model, X_test, y_test):
         self.cv_models.append((name, model))
         p = model.predict(X_test)
-                
+        
+        #you can add more evaluation metrics in this dict here
+        #y test are the correct values and p the predicted values
         d = {
         'Name': name,
         'r2 score': r2_score(y_test, p),
@@ -63,8 +69,9 @@ class model_evaluator:
         self.metrics.append(d)
     
     def evaluate_models(self, X_train, X_test, y_train, y_test, cv=None, verb=0):
-        # Depois criar mais uma função só para as métricas
         for name, model in self.models:
+            #This does only the simple linear regression
+            #Using only the most correlated column
             if name == 'Linear regression':
                 y_train.columns = ['target']
                 fd = pd.concat([X_train, y_train], axis=1)
@@ -80,7 +87,8 @@ class model_evaluator:
                 self.generate_metrics(name, model, X_test[ind].values.reshape(-1, 1), y_test)
                 
                 continue
-                
+            
+            #this is where we do the grid search cross-validation
             if(cv==True and name in self.grid_searchs.keys()):
                 print(f'Cross validating {name}, it may take some time!')
                 m = GridSearchCV(model, param_grid = self.grid_searchs[name], refit=True, verbose=verb)
@@ -97,6 +105,7 @@ class model_evaluator:
         
         self.metrics = self.metrics.set_index('Name').sort_values(by=['r2 score'], ascending=False)
     
+    #This method returns the model that had the best R2 score in the evaluation
     def select_best_r2(self):
         best = self.metrics[self.metrics['r2 score'] == self.metrics['r2 score'].max()]
         print(best)
