@@ -1,5 +1,5 @@
 # Regression-evaluator
-This project is made for search the best regression model based in some metrics training some models and evaluating them
+This project is made for search the best regression model based in metrics (R2 score, MAE, MRE, MRSE). In order to do that some models aren trained, tested and evaluated.
 There's an example this same repository using this algorithm to find the best model for Boston Housing dataset
 
 Table generated with the metrics for Boston Housing
