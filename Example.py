@@ -27,7 +27,7 @@ class model_evaluator:
             ('Linear regression', LinearRegression()),
             ('Multiple linear regression', LinearRegression()),
             ('SVR', SVR()),
-            ('Decision Tree', DecisionTreeRegressor()),
+            ('Decision Tree', DecisionTreeRegressor(random_state=42)),
             ('Random Forest', RandomForestRegressor(random_state=42)),
             ('KNN regressor', KNeighborsRegressor()),
         ]

@@ -4,8 +4,8 @@ There's an example this same repository using this algorithm to find the best mo
 
 Table generated with the metrics for Boston Housing
 
-![table1](https://user-images.githubusercontent.com/54556367/121899764-1a000a80-ccfb-11eb-8977-5b8a3a6154ec.png)
+![table1](https://user-images.githubusercontent.com/54556367/122564471-c273de80-d01b-11eb-9812-07797a36fc15.png)
 
 Table generated with the metrics for Boston Housing with grid search (the _cv's are the ones that get through grid search)
 
-![table2](https://user-images.githubusercontent.com/54556367/121899979-4b78d600-ccfb-11eb-928e-238d5d22b38f.png)
+![table2](https://user-images.githubusercontent.com/54556367/122564523-d6b7db80-d01b-11eb-8020-6b58b5edfcf4.png)
